@@ -1,0 +1,16 @@
+/* main  */
+
+.container {
+    display: flex;
+    gap: 30px;
+}
+
+main {
+    flex: 1;
+    order: 1;
+}
+
+aside {
+    flex: 1;
+    order: 2;
+}
