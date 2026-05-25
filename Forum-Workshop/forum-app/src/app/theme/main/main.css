@@ -1,0 +1,31 @@
+/* main  */
+
+main {
+    width: 100%;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 4.5em;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+app-theme-list {
+    flex: 3;
+    min-width: 0;
+}
+
+app-post-list {
+    flex: 1;
+    min-width: 0;
+}
+
+aside {
+    /* width: 29%; */
+    margin-top: 1em;
+    font-size: 0.8em;
+}
