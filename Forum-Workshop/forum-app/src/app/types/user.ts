@@ -6,6 +6,7 @@ export interface User {
     username: string;
     email: string;
     password: string;
+    rePassword: string;
     tel: string;
     created_at: string;
     posts: Post[];

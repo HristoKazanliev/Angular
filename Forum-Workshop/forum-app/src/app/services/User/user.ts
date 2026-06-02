@@ -17,16 +17,16 @@ export class UserService {
     this.loadUser();
   }
 
-  register(username: string, email: string, password: string) {
-    const newUser = {
-      _id: this.userId,
-      username,
-      email,
-      password
-    };
+  register(user: User ) {
+    // const newUser = {
+    //   _id: this.userId,
+    //   username: user.username,
+    //   email: user.email,
+    //   password: user.password
+    // };
 
-    localStorage.setItem('user', JSON.stringify(newUser));
-    this._currUser.set(newUser);
+    localStorage.setItem('user', JSON.stringify(user));
+    this._currUser.set(user);
   }
 
   login(email: string, password: string) {

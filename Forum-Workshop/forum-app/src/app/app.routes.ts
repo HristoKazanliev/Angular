@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { NotFoundComponent } from './not-found/not-found';
 import { HomeComponent } from './home/home';
 import { MainComponent } from './theme/main/main';
+import { RegisterComponent } from './auth/register/register';
 
 export const routes: Routes = [
     {
@@ -11,6 +12,7 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     { path: 'home', component: HomeComponent },
-    { path: 'themes', component: MainComponent }, 
+    { path: 'themes', component: MainComponent },
+    { path: 'register', component: RegisterComponent }, 
     { path: '**', component: NotFoundComponent }
 ];
