@@ -3,6 +3,7 @@ import { NotFoundComponent } from './not-found/not-found';
 import { HomeComponent } from './home/home';
 import { MainComponent } from './theme/main/main';
 import { RegisterComponent } from './auth/register/register';
+import { LoginComponent } from './auth/login/login';
 
 export const routes: Routes = [
     {
@@ -13,6 +14,7 @@ export const routes: Routes = [
     },
     { path: 'home', component: HomeComponent },
     { path: 'themes', component: MainComponent },
-    { path: 'register', component: RegisterComponent }, 
+    { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent}, 
     { path: '**', component: NotFoundComponent }
 ];
