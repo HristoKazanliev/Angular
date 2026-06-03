@@ -1,0 +1,23 @@
+<app-header></app-header>
+
+<!-- homepage -->
+<div class="container">
+    <div class="profile"><img src="./../../../assets/images/profile.png" alt="default user">
+        <h3>User Info:</h3>
+        <div class="flex">
+            <p>Username: </p>
+            <p>{{user()?.username || 'Johny'}}</p>
+        </div>
+        <div class="flex">
+            <p>Email: </p>
+            <p>{{user()?.email || 'john.doe@gmail.com'}}</p>
+        </div>
+        <div class="flex">
+            <p>Phone: </p>
+            <p>{{user()?.phone || '+359 885 888 888'}}</p>
+        </div>
+        <button class="edit-button">Edit</button>
+    </div>
+</div>
+
+<app-footer></app-footer>
