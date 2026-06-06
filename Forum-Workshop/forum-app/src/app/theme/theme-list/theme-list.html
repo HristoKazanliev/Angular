@@ -32,7 +32,13 @@
                             </div>
                         </div>
                         <div class="subscribers">
-                            <!-- <button class="subscribe">Subscribe</button> -->
+                            @if (userService.isLoggedIn()) {
+                                @if (!isSubscribed(theme)) {
+                                    <button class="subscribe" (click)="subscribe(theme)">Subscribe</button>
+                                } @else {
+                                    <button class="unsubscribe" (click)="unsubscribe(theme)">Unsubscribe</button>
+                                }
+                            }
                             <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, inject, ChangeDetectionStrategy, ChangeDetectorRef }
 
 import { Theme } from '../../types/theme';
 import { ApiService } from '../../services/api';
+import { UserService } from '../../services/User/user';
 
 @Component({
   selector: 'app-theme-list',
@@ -13,6 +14,7 @@ import { ApiService } from '../../services/api';
 })
 export class ThemeListComponent implements OnInit {
   private apiService = inject(ApiService);
+  userService = inject(UserService);
   private cdr = inject(ChangeDetectorRef);
   themes: Theme[] = [];
 
@@ -27,5 +29,17 @@ export class ThemeListComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  isSubscribed(theme: Theme): boolean {
+    return theme.subscribers.includes(this.userService.userId);
+  }
+
+  subscribe(theme: Theme): void {
+    theme.subscribers.push(this.userService.userId);
+  }
+
+  unsubscribe(theme: Theme): void {
+    theme.subscribers = theme.subscribers.filter(id => id !== this.userService.userId);
   }
 }

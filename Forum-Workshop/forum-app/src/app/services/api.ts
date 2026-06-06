@@ -24,4 +24,8 @@ export class ApiService {
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postsUrl);
   }
+
+  createTheme(themeName: string, postText: string): Observable<Theme> {
+    return this.http.post<Theme>(this.themesUrl, { themeName, postText });
+  }
 }

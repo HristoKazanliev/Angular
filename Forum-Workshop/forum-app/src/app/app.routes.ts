@@ -5,6 +5,8 @@ import { MainComponent } from './theme/main/main';
 import { RegisterComponent } from './auth/register/register';
 import { LoginComponent } from './auth/login/login';
 import { ProfileComponent } from './auth/profile/profile';
+import { CreateThemeComponent } from './theme/create-theme/create-theme';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
     {
@@ -18,5 +20,6 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent},
     { path: 'profile', component: ProfileComponent}, 
-    { path: '**', component: NotFoundComponent }
+    { path: '**', component: NotFoundComponent },
+    { path: 'create-theme', component: CreateThemeComponent, canActivate: [authGuard] },
 ];
