@@ -20,13 +20,15 @@ export class RegisterComponent {
   password = '';
   rePassword = '';
   tel = '';
+  errorMessage = '';
 
   register(): void {
     if (this.password !== this.rePassword) {
-      alert('Passwords do not match!');
+      this.errorMessage = 'Passwords do not match!';
       return;
     }
 
+    this.errorMessage = '';
     this.userService.register({
       _id: this.userService.userId,
       username: this.username,
@@ -37,6 +39,14 @@ export class RegisterComponent {
       created_at: Date.now().toString(),
       posts: [],
       themes: []
+    }).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Registration failed:', err);
+        this.errorMessage = err.error?.message || 'Registration failed. Please try again.';
+      }
     });
 
     this.router.navigate(['/home']);

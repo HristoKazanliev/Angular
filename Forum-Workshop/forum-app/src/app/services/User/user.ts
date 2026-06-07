@@ -16,27 +16,34 @@ export class UserService {
   readonly userId = '5fa64b162183ce1728ff371d';
 
   private loginUrl = 'http://localhost:3000/api/login';
+  private registerUrl = 'http://localhost:3000/api/register';
 
   constructor(private http: HttpClient) {
     this.loadUser();
   }
 
-  register(user: User ) {
-    // const newUser = {
-    //   _id: this.userId,
-    //   username: user.username,
-    //   email: user.email,
-    //   password: user.password
-    // };
-
-    localStorage.setItem('user', JSON.stringify(user));
-    this._currUser.set(user);
+  register(user: User): Observable<User> {
+    return new Observable((observer) => {
+      this.http.post<User>(this.registerUrl, user, { withCredentials: true }).subscribe({
+        next: (registeredUser) => {
+          localStorage.setItem('user', JSON.stringify(registeredUser));
+          this._currUser.set(registeredUser);
+          observer.next(registeredUser);
+          observer.complete();
+        },
+        error: (err) => {
+          console.error('Registration error:', err);
+          observer.error(err);
+        }
+      });
+    });
   }
 
   login(email: string, password: string): Observable<User> {
     return new Observable((observer) => {
       this.http.post<User>(this.loginUrl, { email, password }, { withCredentials: true }).subscribe({
         next: (user) => {
+          //user._id = this.userId; // Assign the hardcoded userId
           localStorage.setItem('user', JSON.stringify(user));
           this._currUser.set(user);
           observer.next(user);
