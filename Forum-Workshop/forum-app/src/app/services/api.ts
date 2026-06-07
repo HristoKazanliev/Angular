@@ -26,6 +26,6 @@ export class ApiService {
   }
 
   createTheme(themeName: string, postText: string): Observable<Theme> {
-    return this.http.post<Theme>(this.themesUrl, { themeName, postText });
+    return this.http.post<Theme>(this.themesUrl, { themeName, postText }, { withCredentials: true });
   }
 }

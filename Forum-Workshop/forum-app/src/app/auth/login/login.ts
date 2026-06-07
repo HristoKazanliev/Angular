@@ -17,9 +17,18 @@ export class LoginComponent {
 
   email = '';
   password = '';
+  errorMessage = '';
 
   login(): void {
-    this.userService.login(this.email, this.password);
-    this.router.navigate(['/home']);
+    this.errorMessage = '';
+    this.userService.login(this.email, this.password).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Login failed:', err);
+        this.errorMessage = 'Invalid email or password';
+      }
+    });
   }
 }

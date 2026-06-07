@@ -20,6 +20,10 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent},
     { path: 'profile', component: ProfileComponent}, 
+    { path: 'create-theme', 
+      component: CreateThemeComponent, 
+      canActivate: [authGuard] 
+      },
     { path: '**', component: NotFoundComponent },
-    { path: 'create-theme', component: CreateThemeComponent, canActivate: [authGuard] },
+
 ];

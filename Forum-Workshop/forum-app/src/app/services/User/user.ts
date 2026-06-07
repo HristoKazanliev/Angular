@@ -1,4 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { User } from '../../types/user';
 
 @Injectable({
@@ -13,7 +15,9 @@ export class UserService {
   // Hardcoded userId for subscriptions (as per workshop note)
   readonly userId = '5fa64b162183ce1728ff371d';
 
-  contrsuctor() {
+  private loginUrl = 'http://localhost:3000/api/login';
+
+  constructor(private http: HttpClient) {
     this.loadUser();
   }
 
@@ -29,16 +33,21 @@ export class UserService {
     this._currUser.set(user);
   }
 
-  login(email: string, password: string) {
-    const user = {
-      _id: this.userId,
-      username: 'Jhon Doe',
-      email,
-      password
-    };
-
-    localStorage.setItem('user', JSON.stringify(user));
-    this._currUser.set(user);
+  login(email: string, password: string): Observable<User> {
+    return new Observable((observer) => {
+      this.http.post<User>(this.loginUrl, { email, password }, { withCredentials: true }).subscribe({
+        next: (user) => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this._currUser.set(user);
+          observer.next(user);
+          observer.complete();
+        },
+        error: (err) => {
+          console.error('Login error:', err);
+          observer.error(err);
+        }
+      });
+    });
   }
 
   logout() {
