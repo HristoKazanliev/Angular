@@ -3,11 +3,12 @@ import { Component, OnInit, inject, ChangeDetectionStrategy, ChangeDetectorRef }
 import { Theme } from '../../types/theme';
 import { ApiService } from '../../services/api';
 import { UserService } from '../../services/User/user';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-theme-list',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './theme-list.html',
   styleUrl: './theme-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

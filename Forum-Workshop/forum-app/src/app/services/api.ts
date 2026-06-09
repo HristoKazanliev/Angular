@@ -21,11 +21,19 @@ export class ApiService {
     return this.http.get<Theme[]>(this.themesUrl);
   }
 
+  getThemeById(themeId: string): Observable<Theme> {
+    return this.http.get<Theme>(`${this.themesUrl}/${themeId}`);
+  }
+
   getPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(this.postsUrl);
   }
 
   createTheme(themeName: string, postText: string): Observable<Theme> {
     return this.http.post<Theme>(this.themesUrl, { themeName, postText }, { withCredentials: true });
+  }
+
+  createPost(themeId: string, postText: string) {
+    return this.http.post(`${this.themesUrl}/${themeId}`,{ postText }, { withCredentials: true });
   }
 }

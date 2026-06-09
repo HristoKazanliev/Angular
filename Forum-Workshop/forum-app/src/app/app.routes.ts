@@ -7,6 +7,7 @@ import { LoginComponent } from './auth/login/login';
 import { ProfileComponent } from './auth/profile/profile';
 import { CreateThemeComponent } from './theme/create-theme/create-theme';
 import { authGuard } from './guards/auth-guard';
+import { ThemeCommentComponent } from './theme/theme-comment/theme-comment';
 
 export const routes: Routes = [
     {
@@ -23,7 +24,8 @@ export const routes: Routes = [
     { path: 'create-theme', 
       component: CreateThemeComponent, 
       canActivate: [authGuard] 
-      },
+    },
+    { path: 'themes/:id', component: ThemeCommentComponent},
     { path: '**', component: NotFoundComponent },
 
 ];
