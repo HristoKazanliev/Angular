@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HeaderComponent } from "../../shared/header/header";
 import { FooterComponent } from "../../shared/footer/footer";
 import { ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { Theme } from '../../types/theme';
 
 @Component({
   selector: 'app-theme-comment',
+  standalone: true,
   imports: [HeaderComponent, FooterComponent, FormsModule],
   templateUrl: './theme-comment.html',
   styleUrl: './theme-comment.css',
@@ -16,6 +17,7 @@ import { Theme } from '../../types/theme';
 export class ThemeCommentComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private themeService = inject(ApiService);
+  private cdr = inject(ChangeDetectorRef);
   userService = inject(UserService);
   
   theme: Theme | null = null;
@@ -37,7 +39,9 @@ export class ThemeCommentComponent implements OnInit {
   loadTheme(themeId: string): void {
     this.themeService.getThemeById(themeId).subscribe({
       next: (theme) => {
+        //console.log(theme);
         this.theme = theme;
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Error loading theme:', err);
@@ -46,10 +50,30 @@ export class ThemeCommentComponent implements OnInit {
       
   }
 
-  addComment(themeId: string,postText: string): void {
-    if (!postText) return;
+  addComment(): void {
+    if (!this.newComment) return;
 
-    
+    this.themeService.createPost(this.theme!._id, this.newComment).subscribe(response => {
+      console.log(response);
+      // Clear the input field after successful comment submission
+      this.newComment = '';
+      // Reload the theme to display the new comment
+      this.loadTheme(this.theme!._id);
+    });
   }
+
+  likePost(postId: string): void {
+    this.themeService.likePost(postId).subscribe({
+      next: () => {
+        if (this.theme) {
+          this.loadTheme(this.theme._id);
+        }
+      },
+      error: (err) => {
+        console.error('Error liking post:', err);
+      } 
+    });
+  }
+
 }
 

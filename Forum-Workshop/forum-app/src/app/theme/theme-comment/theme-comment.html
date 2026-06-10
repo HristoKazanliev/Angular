@@ -12,7 +12,7 @@
                     <p>Date: <time>{{theme.created_at}}</time></p>
                 </div>
                 <div class="subscribers">
-                    <p>Subscribers: <span>{{theme?.subscribers?.length}}</span></p>
+                    <p>Subscribers: <span>{{theme.subscribers.length}}</span></p>
                     <!-- <button class="subscribe">Subscribe</button>
                         <button class="unsubscribe">Unsubscribe</button> -->
                 </div>
@@ -28,21 +28,23 @@
                 </header>
                 <div class="comment-main">
                     <div class="userdetails">
-                        <img src="assets/images/profile.png" alt="avatar">
+                        <img src="forum-app\public\profile.png" alt="avatar">
                     </div>
                     <div class="post-content">
                         <p>{{post.text}}</p>
                     </div>
                 </div>
                 <div class="footer">
-                    <!-- <i class="fas fa-thumbs-up"></i>
-                        <i class="fas fa-thumbs-down"></i> -->
-                    <p><span>{{post.likes.length}}</span> likes</p>
+                    @if (userService.isLoggedIn()  ) {
+                        <i class="fas fa-thumbs-up" (click)="likePost(post._id)"></i>
+                        <!-- <i class="fas fa-thumbs-down"></i> -->
+                        <p><span>{{post.likes.length}}</span> likes</p>
+                    }
+                    
                 </div>
             </div>
             }
         }
-
 
         <!-- Add Comment (logged in only) -->
         @if (userService.isLoggedIn()) {
@@ -57,7 +59,6 @@
             </div>
         </div>
         }
-
 
     </div>
 </div>

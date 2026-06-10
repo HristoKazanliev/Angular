@@ -13,9 +13,9 @@ export class ApiService {
    // Make it private because we want ot use it only into the class and not into the HTML template
   constructor(private http: HttpClient) { }
 
-
   private themesUrl = 'http://localhost:3000/api/themes';
   private postsUrl = 'http://localhost:3000/api/posts?limit=5';
+  private likesUrl = 'http://localhost:3000/api/likes';
 
   getThemes(): Observable<Theme[]> {
     return this.http.get<Theme[]>(this.themesUrl);
@@ -33,7 +33,11 @@ export class ApiService {
     return this.http.post<Theme>(this.themesUrl, { themeName, postText }, { withCredentials: true });
   }
 
-  createPost(themeId: string, postText: string) {
-    return this.http.post(`${this.themesUrl}/${themeId}`,{ postText }, { withCredentials: true });
+  createPost(themeId: string, postText: string): Observable<Post> {
+    return this.http.post<Post>(`${this.themesUrl}/${themeId}`,{ postText }, { withCredentials: true });
+  }
+
+  likePost(postId: string): Observable<Post> {
+    return this.http.put<Post>(`${this.likesUrl}/${postId}`, {}, { withCredentials: true });
   }
 }
