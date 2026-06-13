@@ -9,7 +9,7 @@
             @if(posts.length > 0) {
             @for (post of posts; track post._id) {
             <div class="aside-theme">
-                <a href="#">
+                <a [routerLink]="['/themes', post.themeId._id]">
                     <h3>{{post.themeId.themeName}}</h3>
                     <p>{{post.userId.username}}</p>
                     <p><span>{{post.created_at}}</span></p>
