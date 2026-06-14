@@ -2,19 +2,24 @@
 
 <!-- homepage -->
 <div class="container">
-    <form class="login" #form="ngForm" (ngSubmit)="login()">
+    <form class="login" [formGroup]="form" (ngSubmit)="login()">
 
         <fieldset>
             <h2>Login Form</h2>
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input class="input-error" type="email" name="email" id="email" placeholder="john.doe@gmail.com"
-                    [(ngModel)]="email" required #emailInput="ngModel">
+                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" formControlName="email" required >
             </p>
-            @if (emailInput.touched && emailInput.invalid) {
+            @if (email.touched && email.errors?.['required']) {
             <p class="error">
-                Email is required!
+                Valid email is required!
+            </p>
+            }
+
+            @if(email.touched && email.errors?.['invalidEmail']) {
+            <p class="error">
+                Email must be at least 5 characters and @gmail.com / @gmail.bg!
             </p>
             }
 
@@ -24,18 +29,18 @@
 
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******" minlength="4"
-                    [(ngModel)]="password" required #passwordInput="ngModel">
+                <input [class.input-error]="password.touched && password.invalid" type="password" name="password" id="password" placeholder="******" minlength="5"
+                    formControlName="password" required >
             </p>
-            @if(passwordInput.touched && passwordInput.errors?.['required']) {
+            @if(password.touched && password.invalid) {
             <p class="error">
                 Password is required!
             </p>
             }
 
-            @if(passwordInput.touched && passwordInput.errors?.['minlength']) {
+            @if(password.touched && password.errors?.['minlength']) {
             <p class="error">
-                Password must be at least 4 characters!
+                Password must be at least 5 characters!
             </p>
             }
 

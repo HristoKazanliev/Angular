@@ -2,7 +2,7 @@
 
 <!-- homepage -->
 <div class="container">
-    <form class="register" #form="ngForm" (ngSubmit)="register()">
+    <form class="register" [formGroup]="form" (ngSubmit)="register()">
 
         <fieldset>
             <h2>Registration Form</h2>
@@ -11,11 +11,11 @@
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
                 <!-- <input class="input-error" type="text" name="username" id="username" placeholder="Johny"> -->
-                <input type="text" name="username" id="username" placeholder="Johny" 
-                [(ngModel)]="username" required #usernameInput="ngModel" [class.input-error]="usernameInput.touched && usernameInput.invalid">
+                <input type="text" name="username" id="username" placeholder="Johny" formControlName="username" required
+                    [class.input-error]="username.touched && username.invalid">
             </p>
-            @if (usernameInput.touched && usernameInput.invalid) {
-            <p class="error" >
+            @if (username.touched && username.invalid) {
+            <p class="error">
                 Username is required!
             </p>
             }
@@ -23,18 +23,18 @@
             <!-- email -->
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" [(ngModel)]="email"
-                    required #emailInput="ngModel">
+                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" formControlName="email"
+                    required [class.input-error]="email.touched && email.invalid">
             </p>
-            @if(emailInput.touched && emailInput.errors?.['required']) {
+            @if(email.touched && email.errors?.['required']) {
             <p class="error">
                 Email is required!
             </p>
             }
 
-            @if(emailInput.touched && emailInput.errors?.['email']) {
+            @if(email.touched && email.errors?.['invalidEmail']) {
             <p class="error">
-                Email is not valid!
+                Email must be at least 5 characters and @gmail.com / @gmail.bg!
             </p>
             }
             <!-- <p class="error">
@@ -50,47 +50,48 @@
                 <select name="select-tel" id="select-tel" class="tel">
                     <option value="00359">+359</option>
                 </select>
-                <input type="text" name="tel" id="tel" placeholder="885 888 888" [(ngModel)]="tel" #telInput="ngModel">
+                <input type="text" name="tel" id="tel" placeholder="885 888 888" formControlName="tel">
             </p>
 
-            <!-- password -->
-            <p class="field field-icon">
-                <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******" [(ngModel)]="password"
-                    required minlength="4" #passwordInput="ngModel">
-            </p>
-            @if(passwordInput.touched && passwordInput.errors?.['required']) {
-            <p class="error">
-                Password is required!
-            </p>
-            }
+            <div formGroupName="passwords">
+                <!-- password -->
+                <p class="field field-icon">
+                    <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="password" id="password" placeholder="******" formControlName="password" required minlength="5">
+                </p>
+                @if(password.touched && password.errors?.['required']) {
+                <p class="error">
+                    Password is required!
+                </p>
+                }
 
-            @if(passwordInput.touched && passwordInput.errors?.['minlength']) {
-            <p class="error">
-                Password must be at least 4 characters!
-            </p>
-            }
-            <!-- <p class="error">
+                @if(password.touched && password.errors?.['minlength']) {
+                <p class="error">
+                    Password must be at least 5 characters!
+                </p>
+                }
+                <!-- <p class="error">
                     Password is required!
                 </p>
                 <p class="error">
                     Password must be at least 4 characters!
                 </p> -->
 
-            <!-- rePassword -->
-            <p class="field field-icon">
-                <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="rePassword" id="rePassword" placeholder="******" [(ngModel)]="rePassword"
-                    required>
-            </p>
-            @if(rePassword && password !== rePassword) {
-            <p class="error">
-                Repeat Password does not match password!
-            </p>
-            }
-            <!-- <p class="error">Repeat Password does not match password!</p> -->
+                <!-- rePassword -->
+                <p class="field field-icon">
+                    <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="rePassword" id="rePassword" placeholder="******"
+                        formControlName="rePassword" required>
+                </p>
+                @if(rePassword.touched && passwords.errors?.['passwordMismatch']) {
+                <p class="error">
+                    Repeat Password does not match password!
+                </p>
+                }
+                <!-- <p class="error">Repeat Password does not match password!</p> -->
+            </div>
 
-            <button [disabled]="form.invalid || password !== rePassword">
+            <button [disabled]="form.invalid">
                 Create Account
             </button>
 
