@@ -1,6 +1,7 @@
 <app-header></app-header>
 
-<!-- homepage -->
+<!-- view -->
+@if (!isEditing) {
 <div class="container">
     <div class="profile"><img src="./profile.png" alt="default user">
         <h3>User Info:</h3>
@@ -16,8 +17,68 @@
             <p>Phone: </p>
             <p>{{user()?.phone || '+359 885 888 888'}}</p>
         </div>
-        <button class="edit-button">Edit</button>
+        <button class="edit-button" (click)="startEditing()">Edit</button>
     </div>
 </div>
+}
+
+<!-- edit -->
+@if (isEditing) {
+<div class="container">
+    <div class="profile">
+        <img src="./profile.png" alt="default user">
+        <h3>User Info:</h3>
+        <form #form="ngForm" (ngSubmit)="saveProfile(form)">
+            <div class="flex">
+                <p>Username: </p>
+                <input type="text" name="username" id="username" value="Johny" required [(ngModel)]="editUser.username"
+                    minlength="5" #usernameInput="ngModel"
+                    [class.input-error]="usernameInput.touched && usernameInput.invalid">
+            </div>
+            @if(usernameInput.touched && usernameInput.errors?.['required']) {
+                <p class="error">
+                    Username is required!
+                </p>
+            }
+
+            @if(usernameInput.touched && usernameInput.errors?.['minlength']) {
+                <p class="error">
+                    Username must be at least 5 characters!
+                </p>
+            }
+
+            <div class="flex">
+                <p>Email: </p>
+                <input type="email" name="email" id="email" value="john.doe@gmail.com" required
+                    [(ngModel)]="editUser.email" #emailInput="ngModel" minlength="6"
+                    pattern="^[a-zA-Z0-9._%+\-]{5,}@gmail\.(com|bg)">
+            </div>
+            @if(emailInput.touched && emailInput.errors?.['required']) {
+                <p class="error">
+                    Email is required!
+                </p>
+            }
+
+            @if(emailInput.touched && emailInput.errors?.['pattern']) {
+                <p class="error">
+                    Email is not valid!
+                </p>
+            }
+
+            <div class="flex">
+                <p>Phone: </p>
+                <div>
+                    <select name="select-tel" id="select-tel" class="tel">
+                        <option value="00359">+359</option>
+                    </select>
+                    <input type="text" name="tel" id="tel" value="885 888 888" [(ngModel)]="editUser.tel">
+                </div>
+            </div>
+            <button class="red-button" (click)="cancelEditing()">Cancel</button>
+            <button class="green-button" type="submit" [disabled]="form.invalid">Save</button>
+        </form>
+    </div>
+</div>
+}
 
 <app-footer></app-footer>

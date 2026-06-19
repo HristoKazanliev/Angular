@@ -17,6 +17,8 @@ export class UserService {
 
   private loginUrl = 'http://localhost:3000/api/login';
   private registerUrl = 'http://localhost:3000/api/register';
+  private usersUrl = 'http://localhost:3000/api/users/profile';
+
 
   constructor(private http: HttpClient) {
     this.loadUser();
@@ -60,6 +62,10 @@ export class UserService {
   logout() {
     localStorage.removeItem('user');
     this._currUser.set(null);
+  }
+  
+  updateProfile(username: string, email: string, phone?: string): Observable<User> {
+    return this.http.put<User>(this.usersUrl, {username, email, phone}, {withCredentials: true});
   }
 
   private loadUser() {

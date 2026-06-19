@@ -15,13 +15,13 @@ export class CreateThemeComponent {
   private themeService = inject(ApiService);
   private router = inject(Router);
 
-  themeName = signal('');
-  postText = signal('');
+  themeName = '';
+  postText = '';
 
   createTheme(): void {
-    if (!this.themeName() || !this.postText()) return;
+    //if (!this.themeName() || !this.postText()) return;
 
-    this.themeService.createTheme(this.themeName(), this.postText()).subscribe({
+    this.themeService.createTheme(this.themeName, this.postText).subscribe({
       next:(theme) => {
         console.log('Theme created:', theme);
         this.router.navigate(['/themes', theme._id]);
