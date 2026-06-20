@@ -15,7 +15,7 @@
         </div>
         <div class="flex">
             <p>Phone: </p>
-            <p>{{user()?.phone || '+359 885 888 888'}}</p>
+            <p>{{user()?.tel || '+359 885 888 888'}}</p>
         </div>
         <button class="edit-button" (click)="startEditing()">Edit</button>
     </div>
@@ -32,8 +32,7 @@
             <div class="flex">
                 <p>Username: </p>
                 <input type="text" name="username" id="username" value="Johny" required [(ngModel)]="editUser.username"
-                    minlength="5" #usernameInput="ngModel"
-                    [class.input-error]="usernameInput.touched && usernameInput.invalid">
+                    minlength="5" #usernameInput="ngModel" appInputError>
             </div>
             @if(usernameInput.touched && usernameInput.errors?.['required']) {
                 <p class="error">
@@ -51,7 +50,7 @@
                 <p>Email: </p>
                 <input type="email" name="email" id="email" value="john.doe@gmail.com" required
                     [(ngModel)]="editUser.email" #emailInput="ngModel" minlength="6"
-                    pattern="^[a-zA-Z0-9._%+\-]{5,}@gmail\.(com|bg)">
+                    pattern="^[a-zA-Z0-9._%+\-]{5,}@gmail\.(com|bg)" appInputError>
             </div>
             @if(emailInput.touched && emailInput.errors?.['required']) {
                 <p class="error">

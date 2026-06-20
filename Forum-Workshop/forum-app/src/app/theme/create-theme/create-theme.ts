@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 import { HeaderComponent } from "../../shared/header/header";
 import { FooterComponent } from "../../shared/footer/footer";
 import { FormsModule } from '@angular/forms';
+import { InputErrorDirective } from "../../directives/input-error";
 
 @Component({
   selector: 'app-create-theme',
-  imports: [HeaderComponent, FooterComponent, FormsModule],
+  imports: [HeaderComponent, FooterComponent, FormsModule, InputErrorDirective],
   templateUrl: './create-theme.html',
   styleUrl: './create-theme.css',
 })

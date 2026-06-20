@@ -64,8 +64,23 @@ export class UserService {
     this._currUser.set(null);
   }
   
-  updateProfile(username: string, email: string, phone?: string): Observable<User> {
-    return this.http.put<User>(this.usersUrl, {username, email, phone}, {withCredentials: true});
+  updateProfile(username: string, email: string, tel?: string): Observable<User> {
+    return new Observable((observer) => {
+      this.http.put<User>(this.usersUrl, {username, email, tel}, {withCredentials: true}).subscribe({
+        next: (user) => {
+          localStorage.setItem('user', JSON.stringify(user));
+          this._currUser.set(user);
+          observer.next(user);
+          observer.complete();
+        },
+        error: (err) => {
+          console.error('Update profile error:', err);
+          observer.error(err);
+        }
+        
+      });
+
+    }) 
   }
 
   private loadUser() {

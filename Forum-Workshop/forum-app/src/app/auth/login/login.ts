@@ -5,10 +5,11 @@ import { HeaderComponent } from "../../shared/header/header";
 import { FooterComponent } from "../../shared/footer/footer";
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emailValidator } from '../../validators/emailValidator';
+import { InputErrorDirective } from "../../directives/input-error";
 
 @Component({
   selector: 'app-login',
-  imports: [HeaderComponent, FooterComponent, FormsModule, RouterLink, ReactiveFormsModule],
+  imports: [HeaderComponent, FooterComponent, FormsModule, RouterLink, ReactiveFormsModule, InputErrorDirective],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

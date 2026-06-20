@@ -10,7 +10,7 @@
             <div class="new-theme-title">
                 <label for="themeName">Title <span class="red">*</span></label>
                 <input type="text" name="themeName" id="themeName" [(ngModel)]="themeName" required minlength="5"
-                    #themeNameInput="ngModel">
+                    #themeNameInput="ngModel" appInputError>
                 @if (themeNameInput.touched && themeNameInput.errors?.['required']) {
                     <p class="error">
                         Theme name is required.

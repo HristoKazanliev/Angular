@@ -6,10 +6,11 @@ import { HeaderComponent } from "../../shared/header/header";
 import { FooterComponent } from "../../shared/footer/footer";
 import { emailValidator } from '../../validators/emailValidator';
 import { passwordMatchValidator } from '../../validators/passwordMatchValidator';
+import { InputErrorDirective } from "../../directives/input-error";
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule, HeaderComponent, FooterComponent, RouterLink, ReactiveFormsModule],
+  imports: [FormsModule, HeaderComponent, FooterComponent, RouterLink, ReactiveFormsModule, InputErrorDirective],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })

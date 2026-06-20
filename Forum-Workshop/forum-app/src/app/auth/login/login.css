@@ -82,5 +82,5 @@ p.error {
 }
 
 .input-error {
-    border-left-color: red;
+    border-left-color: red !important;
 }

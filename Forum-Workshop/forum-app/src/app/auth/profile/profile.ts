@@ -3,10 +3,11 @@ import { FooterComponent } from "../../shared/footer/footer";
 import { HeaderComponent } from "../../shared/header/header";
 import { UserService } from '../../services/User/user';
 import { FormsModule } from '@angular/forms';
+import { InputErrorDirective } from "../../directives/input-error";
 
 @Component({
   selector: 'app-profile',
-  imports: [FooterComponent, HeaderComponent, FormsModule],
+  imports: [FooterComponent, HeaderComponent, FormsModule, InputErrorDirective],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
@@ -43,13 +44,12 @@ export class ProfileComponent {
     if (form.invalid) return;
     
     this.userService.updateProfile(this.editUser.username, this.editUser.email, this.editUser.tel).subscribe({
-      next: (updatedUser) => {
-        console.log();
-        localStorage.setItem('user', JSON.stringify(updatedUser));
+      next: () => {
+        //console.log();
         this.isEditing = false;
       },
       error: (err) => {
-        console.error('Update failed', err);
+        console.error('Update profile failed', err);
       }
     });
 

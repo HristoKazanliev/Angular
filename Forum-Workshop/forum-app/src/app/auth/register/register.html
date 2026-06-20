@@ -11,8 +11,7 @@
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
                 <!-- <input class="input-error" type="text" name="username" id="username" placeholder="Johny"> -->
-                <input type="text" name="username" id="username" placeholder="Johny" formControlName="username" required
-                    [class.input-error]="username.touched && username.invalid">
+                <input type="text" name="username" id="username" placeholder="Johny" formControlName="username" required appInputError>
             </p>
             @if (username.touched && username.invalid) {
             <p class="error">
@@ -24,7 +23,7 @@
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
                 <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" formControlName="email"
-                    required [class.input-error]="email.touched && email.invalid">
+                    required appInputError >
             </p>
             @if(email.touched && email.errors?.['required']) {
             <p class="error">
@@ -57,7 +56,7 @@
                 <!-- password -->
                 <p class="field field-icon">
                     <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                    <input type="password" name="password" id="password" placeholder="******" formControlName="password" required minlength="5">
+                    <input type="password" name="password" id="password" placeholder="******" formControlName="password" required minlength="5" appInputError>
                 </p>
                 @if(password.touched && password.errors?.['required']) {
                 <p class="error">
@@ -81,7 +80,7 @@
                 <p class="field field-icon">
                     <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
                     <input type="password" name="rePassword" id="rePassword" placeholder="******"
-                        formControlName="rePassword" required>
+                        formControlName="rePassword" required appInputError>
                 </p>
                 @if(rePassword.touched && passwords.errors?.['passwordMismatch']) {
                 <p class="error">

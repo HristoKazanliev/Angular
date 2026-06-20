@@ -9,7 +9,7 @@
 
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" formControlName="email" required >
+                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" formControlName="email" required appInputError >
             </p>
             @if (email.touched && email.errors?.['required']) {
             <p class="error">
@@ -29,8 +29,7 @@
 
             <p class="field field-icon">
                 <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input [class.input-error]="password.touched && password.invalid" type="password" name="password" id="password" placeholder="******" minlength="5"
-                    formControlName="password" required >
+                <input [class.input-error]="password.touched && password.invalid" type="password" name="password" id="password" placeholder="******" minlength="5" formControlName="password" required appInputError>
             </p>
             @if(password.touched && password.invalid) {
             <p class="error">
