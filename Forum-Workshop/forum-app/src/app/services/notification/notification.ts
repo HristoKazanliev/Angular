@@ -16,6 +16,11 @@ export class NotificationService {
     this.autoDismiss();
   }
 
+  showSuccess(message: string): void {
+    this.notification.set({ message, type: 'success' });
+    this.autoDismiss();
+  }
+
   clear(): void {
     this.notification.set(null);
   }

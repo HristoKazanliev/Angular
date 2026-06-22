@@ -38,5 +38,13 @@
             }
         </ul>
     </nav>
+    @if (notificationService.notification(); as note) {
+    <p class="notification" 
+        [class.error-message]="note.type === 'error'"
+        [class.success-message]="note.type === 'success'" 
+        (click)="notificationService.clear()">
+            {{ note.message }}
+    </p>
+    }
 
 </header>
