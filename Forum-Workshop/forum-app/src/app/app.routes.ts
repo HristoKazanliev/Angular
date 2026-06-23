@@ -1,13 +1,5 @@
 import { Routes } from '@angular/router';
-import { NotFoundComponent } from './not-found/not-found';
-import { HomeComponent } from './home/home';
-import { MainComponent } from './theme/main/main';
-import { RegisterComponent } from './auth/register/register';
-import { LoginComponent } from './auth/login/login';
-import { ProfileComponent } from './auth/profile/profile';
-import { CreateThemeComponent } from './theme/create-theme/create-theme';
 import { authGuard } from './guards/auth-guard';
-import { ThemeCommentComponent } from './theme/theme-comment/theme-comment';
 
 export const routes: Routes = [
     {
@@ -16,16 +8,16 @@ export const routes: Routes = [
         //Requires the entire URL to match exactly, with no trailing segments.
         pathMatch: 'full'
     },
-    { path: 'home', component: HomeComponent },
-    { path: 'themes', component: MainComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'login', component: LoginComponent},
-    { path: 'profile', component: ProfileComponent}, 
+    { path: 'home', loadComponent: () => import('./home/home').then(c => c.HomeComponent) },
+    { path: 'themes', loadComponent: () => import('./theme/main/main').then(c => c.MainComponent) },
+    { path: 'register', loadComponent: () => import('./auth/register/register').then(c => c.RegisterComponent) },
+    { path: 'login', loadComponent: () => import('./auth/login/login').then(c => c.LoginComponent)},
+    { path: 'profile', loadComponent: () => import('./auth/profile/profile').then(c => c.ProfileComponent)}, 
     { path: 'create-theme', 
-      component: CreateThemeComponent, 
+      loadComponent: () => import('./theme/create-theme/create-theme').then(c => c.CreateThemeComponent), 
       canActivate: [authGuard] 
     },
-    { path: 'themes/:id', component: ThemeCommentComponent},
-    { path: '**', component: NotFoundComponent },
+    { path: 'themes/:id', loadComponent: () => import('./theme/theme-comment/theme-comment').then(c => c.ThemeCommentComponent)},
+    { path: '**', loadComponent: () => import('./not-found/not-found').then(c => c.NotFoundComponent) },
 
 ];

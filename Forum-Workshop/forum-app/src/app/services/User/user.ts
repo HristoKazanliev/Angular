@@ -26,7 +26,7 @@ export class UserService {
 
   register(user: User): Observable<User> {
     return new Observable((observer) => {
-      this.http.post<User>(this.registerUrl, user, { withCredentials: true }).subscribe({
+      this.http.post<User>(this.registerUrl, user).subscribe({
         next: (registeredUser) => {
           localStorage.setItem('user', JSON.stringify(registeredUser));
           this._currUser.set(registeredUser);
@@ -43,7 +43,7 @@ export class UserService {
 
   login(email: string, password: string): Observable<User> {
     return new Observable((observer) => {
-      this.http.post<User>(this.loginUrl, { email, password }, { withCredentials: true }).subscribe({
+      this.http.post<User>(this.loginUrl, { email, password }).subscribe({
         next: (user) => {
           //user._id = this.userId; // Assign the hardcoded userId
           localStorage.setItem('user', JSON.stringify(user));
@@ -66,7 +66,7 @@ export class UserService {
   
   updateProfile(username: string, email: string, tel?: string): Observable<User> {
     return new Observable((observer) => {
-      this.http.put<User>(this.usersUrl, {username, email, tel}, {withCredentials: true}).subscribe({
+      this.http.put<User>(this.usersUrl, {username, email, tel}).subscribe({
         next: (user) => {
           localStorage.setItem('user', JSON.stringify(user));
           this._currUser.set(user);

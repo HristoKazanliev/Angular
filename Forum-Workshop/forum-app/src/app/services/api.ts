@@ -30,14 +30,14 @@ export class ApiService {
   }
 
   createTheme(themeName: string, postText: string): Observable<Theme> {
-    return this.http.post<Theme>(this.themesUrl, { themeName, postText }, { withCredentials: true });
+    return this.http.post<Theme>(this.themesUrl, { themeName, postText });
   }
 
   createPost(themeId: string, postText: string): Observable<Post> {
-    return this.http.post<Post>(`${this.themesUrl}/${themeId}`,{ postText }, { withCredentials: true });
+    return this.http.post<Post>(`${this.themesUrl}/${themeId}`,{ postText });
   }
 
   likePost(postId: string): Observable<Post> {
-    return this.http.put<Post>(`${this.likesUrl}/${postId}`, {}, { withCredentials: true });
+    return this.http.put<Post>(`${this.likesUrl}/${postId}`, {});
   }
 }
