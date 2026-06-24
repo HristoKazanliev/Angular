@@ -4,11 +4,13 @@ import { Theme } from '../../types/theme';
 import { ApiService } from '../../services/api';
 import { UserService } from '../../services/User/user';
 import { RouterLink } from '@angular/router';
+import { SliceTitlePipe } from "../../pipes/slice-title-pipe";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-theme-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SliceTitlePipe, DatePipe],
   templateUrl: './theme-list.html',
   styleUrl: './theme-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
