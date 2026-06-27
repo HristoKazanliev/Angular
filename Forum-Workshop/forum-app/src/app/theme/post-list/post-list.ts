@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api';
 import { Post } from '../../types/post';
 import { RouterLink } from '@angular/router';
+import { TimeAgoPipe } from "../../pipes/time-ago-pipe";
 
 @Component({
   selector: 'app-post-list',
-  imports: [RouterLink],
+  imports: [RouterLink, TimeAgoPipe],
   templateUrl: './post-list.html',
   styleUrl: './post-list.css',
 })

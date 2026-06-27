@@ -6,11 +6,12 @@ import { ApiService } from '../../services/api';
 import { UserService } from '../../services/User/user';
 import { FormsModule } from '@angular/forms';
 import { Theme } from '../../types/theme';
+import { FormatDatePipe } from "../../pipes/format-date-pipe";
 
 @Component({
   selector: 'app-theme-comment',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, FormsModule],
+  imports: [HeaderComponent, FooterComponent, FormsModule, FormatDatePipe],
   templateUrl: './theme-comment.html',
   styleUrl: './theme-comment.css',
 })

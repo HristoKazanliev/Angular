@@ -26,7 +26,9 @@
                     </a>
                     <div class="columns">
                         <div>
-                            <p>Date: <time>{{theme.created_at | date:'dd/MM/yyyy/hh:mm:ss'}}</time></p>
+                            <p>Date: <time>{{theme.created_at | formatDate}}</time></p>
+                            <!-- Using Angular's built-in DatePipe
+                            <p>Date: <time>{{theme.created_at | date:'medium'}}</time></p> -->
                             <div class="nick-name">
                                 <p>Username: <span>{{theme.userId.username}}</span></p>
                             </div>

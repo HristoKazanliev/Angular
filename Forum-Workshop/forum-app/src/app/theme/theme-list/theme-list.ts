@@ -6,11 +6,12 @@ import { UserService } from '../../services/User/user';
 import { RouterLink } from '@angular/router';
 import { SliceTitlePipe } from "../../pipes/slice-title-pipe";
 import { DatePipe } from '@angular/common';
+import { FormatDatePipe } from "../../pipes/format-date-pipe";
 
 @Component({
   selector: 'app-theme-list',
   standalone: true,
-  imports: [RouterLink, SliceTitlePipe, DatePipe],
+  imports: [RouterLink, SliceTitlePipe, FormatDatePipe],
   templateUrl: './theme-list.html',
   styleUrl: './theme-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
